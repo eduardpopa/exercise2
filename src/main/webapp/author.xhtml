@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html" xmlns:f="jakarta.faces.core" xmlns:p="http://primefaces.org/ui" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xml:lang="en">
+<f:metadata>
+  <f:viewParam id="author_id" name="id" value="#{author.id}" required="true" requiredMessage="Author ID is required." />
+  <f:viewAction action="#{author.getById}" />
+</f:metadata>
+<ui:composition template="templates/page.xhtml">
+  <ui:define name="header">
+    <h:outputText value="Author details"></h:outputText>
+  </ui:define>
+  <ui:define name="content">
+    <p:card style="width: 100%;">
+      <f:facet name="title">
+        <h:outputText value="#{author.firstName} #{author.lastName}"> </h:outputText>
+      </f:facet>
+      <f:facet name="subtitle">
+      </f:facet>
+      <p:divider />
+      <h:outputText value="Documents: " />
+      <ul>
+        <ui:repeat value="#{author.documents}" var="doc">
+          <li>
+            <p:link value="#{doc.title}" outcome="document" includeViewParams="true">
+              <f:param name="id" value="#{doc.id}" />
+            </p:link>
+          </li>
+        </ui:repeat>
+      </ul>
+      <f:facet name="footer">
+        <p:link outcome="library" value="Back to library"></p:link>
+      </f:facet>
+    </p:card>
+
+  </ui:define>
+</ui:composition>
+
+</html>

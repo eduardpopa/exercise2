@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html" xmlns:f="jakarta.faces.core" xmlns:p="http://primefaces.org/ui" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xml:lang="en">
+
+<ui:composition template="templates/page.xhtml">
+
+  <ui:define name="header">
+    <h:outputText value="List of documents"></h:outputText>
+  </ui:define>
+
+  <ui:define name="content">
+    <h:form>
+      <div class="ui-fluid formgrid grid">
+        <div class="field col-12 md:col-4">
+          <p:outputLabel value="Select an year and press Submit to load the documents" for="inputYear" />
+
+          <div class="ui-inputgroup">
+            <p:selectOneMenu id="inputYear" value="#{library.year}">
+              <f:selectItem itemLabel="Select Year" itemValue="" noSelectionOption="true" />
+              <f:selectItems value="#{library.years}" />
+            </p:selectOneMenu>
+            <p:commandButton value="Submit" icon="pi pi-check" action="#{library.getByYear}" update="listTable" />
+          </div>
+        </div>
+      </div>
+
+      <p:divider />
+      <p:dataTable id="listTable" var="doc" value="#{library.documents}" emptyMessage="No documents found with given criteria" rows="10" paginator="true" paginatorPosition="bottom"
+        paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+        <p:column headerText="Name" sortBy="#{doc.title}" filterBy="#{doc.title}" filterMatchMode="contains" filterPlaceholder="Filter by title">
+          <p:link value="#{doc.title}" outcome="document?faces-redirect=true" includeViewParams="true">
+            <f:param name="id" value="#{doc.id}" />
+          </p:link>
+        </p:column>
+        <p:column headerText="Year">
+          <h:outputText value="#{doc.publicationDate}">
+            <f:convertDateTime pattern="yyyy" />
+          </h:outputText>
+        </p:column>
+      </p:dataTable>
+    </h:form>
+  </ui:define>
+</ui:composition>
+
+</html>

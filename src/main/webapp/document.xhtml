@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html" xmlns:f="jakarta.faces.core" xmlns:p="http://primefaces.org/ui" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xml:lang="en">
+<f:metadata>
+  <f:viewParam id="document_id" name="id" value="#{document.id}" required="true" requiredMessage="Document ID is required." />
+  <f:viewAction action="#{document.getById}" />
+</f:metadata>
+<ui:composition template="templates/page.xhtml">
+  <ui:define name="header">
+    <h:outputText value="Document details"></h:outputText>
+  </ui:define>
+  <ui:define name="content">
+    <p:card style="width: 100%;">
+      <f:facet name="title">
+        <h:outputText value="#{document.title}" />
+      </f:facet>
+      <f:facet name="subtitle">
+        <h:outputText value="Publised: " />
+        <h:outputText value="#{document.publicationDate}">
+          <f:convertDateTime pattern="dd-MM-yyyy" />
+        </h:outputText>
+        <br />
+        <p:link href="#{document.storageLocation}" target="_blank">
+          <i class="pi pi-link"></i>[External source]
+        </p:link>
+      </f:facet>
+      <p:divider />
+      <h:outputText value="Authors: " />
+      <ui:repeat value="#{document.authors}" var="aut" varStatus="status">
+        <p:link value="#{aut.firstName} #{aut.lastName}" outcome="author" includeViewParams="true">
+          <f:param name="id" value="#{aut.id}" />
+        </p:link>
+        <h:outputText value="#{ status.last ? '' : ', '}" />
+      </ui:repeat>
+      <p:divider />
+      <h:outputText value="#{document.description}" escape="false" />
+      <f:facet name="footer">
+        <p:link outcome="library" value="Back to library"></p:link>
+      </f:facet>
+    </p:card>
+  </ui:define>
+</ui:composition>
+
+</html>
