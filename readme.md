@@ -1,6 +1,6 @@
 # BINFO-CEP: Exercise 2 JPA document repository
 
-This is a JPA implementation of a documetn repository .
+This is a JPA implementation of a document repository .
 
 ## Structure
 
