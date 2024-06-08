@@ -6,11 +6,11 @@ This is a JPA implementation of a documetn repository .
 
 The project is composed by following components:
 
-1. Library `./src/main/java/lu/uni/exercise2/Library.java` Session scoped bean allowing to load yearly docuemnts (default current year)
-2. Docuemnt `./src/main/java/lu/uni/exercise2/Document.java` Request scoped bean and entity showing the docuemnt details.
+1. Library `./src/main/java/lu/uni/exercise2/Library.java` Session scoped bean allowing to load yearly documents (default current year)
+2. Document `./src/main/java/lu/uni/exercise2/Document.java` Request scoped bean and entity showing the document details.
 3. Author `./src/main/java/lu/uni/exercise2/Author.java` Request scoped bean and entity showing the author details.
 4. AuthorService (`/src/main/java/lu/uni/exercise2/AuthorService.Java` Application scoped repository for authors
-5. DocumentService `/src/main/java/lu/uni/exercise2/DocuemntService.Java`) Aplication scoped repository for docuemnts.
+5. DocumentService `/src/main/java/lu/uni/exercise2/DocumentService.Java`) Aplication scoped repository for documents.
 
 > \* The web flow is defined in `./src/main/webapp/WEB-INF/faces-config.xml` and the pages can be found under `./src/main/webapp/` folder.
 
